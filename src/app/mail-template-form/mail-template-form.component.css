@@ -1,0 +1,13 @@
+.card-header {
+  background-color: #E63946;
+  color: aliceblue;
+}
+
+.btn.btn-outline-success {
+  margin-right: 3px;
+}
+
+.pagination-controls {
+  text-align: center;
+
+}

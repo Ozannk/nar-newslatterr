@@ -1,0 +1,123 @@
+<div class="arka">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-1">
+      </div>
+      <div class="col-md-10">
+        <div class="card mt-3">
+          <div class="card-header" style="text-align: center;">
+            <h5>
+              <fa-icon [icon]="['fas', 'clock-rotate-left']"></fa-icon>
+              Mail Geçmişi
+            </h5>
+          </div>
+          <div class="card-body">
+            <div class="container text-center">
+              <div class="row">
+                <div class="col">
+                  <div class="input-group mb-2 ng_select">
+                    <span class="input-group-text" id="basic-addon2">Mail Group:</span>
+                    <label for="mailGroups" class="form-label"></label>
+                    <ng-select
+                    id="mailGroups"
+                    class="form-control"
+                    [items]="mailGroups"
+                    bindLabel="name"
+                    appendTo="body"
+                    [multiple]="true"
+                    [(ngModel)]="selectedMailGroups"
+                    (ngModelChange)="onChangeMailGroup($event)"
+                    height="15px">
+                    </ng-select>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="input-group mb-2">
+                    <span class="input-group-text" id="basic-addon2">Mail Template:</span>
+                    <label for="mailTemplates" class="form-label"></label>
+                    <ng-select
+                    id="mailGroups"
+                    class="form-control"
+                    [items]="mailTemplates"
+                    bindLabel="name"
+                    appendTo="body"
+                    [multiple]="true"
+                    [(ngModel)]="selectedMailTemplates"
+                    (ngModelChange)="onChangemailTemplates($event)">
+                    </ng-select>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="input-group mb-2">
+                    <span class="input-group-text" id="basic-addon2">Mail Status:</span>
+                    <label for="mailTemplates" class="form-label"></label>
+                    <ng-select
+                    id="mailGroups2"
+                    class="form-control"
+                    bindLabel="name"
+                    appendTo="body"
+                    [multiple]="false"
+                    [(ngModel)]="selectedMailStatus"
+                    (ngModelChange)="onChangemailStatus($event)">
+
+                    <ng-option value="NEW">NEW</ng-option>
+                    <ng-option value="SUCCESS">SUCCESS</ng-option>
+                    <ng-option value="FAIL">FAIL</ng-option>
+                  </ng-select>
+                  </div>
+                </div>
+              </div>
+            <div>
+              <table mat-table class="table table-bordered table-hover table-striped">
+                <thead style="text-align: center">
+                  <th>Maili Gönderen</th>
+                  <th>Maili Alan</th>
+                  <th>Template Adı</th>
+                    
+                  <th>Mail Gönderim Tarihi</th>
+                  <th>Mail Durumu</th>
+                </thead>
+                <tbody class="align-middle" style="text-align: center;">
+                  <tr *ngFor="let item of mailDetails | paginate: {
+                    itemsPerPage: tableSize,
+                    currentPage: page,
+                    totalItems: count};  let i = index">
+                    <td>
+                      {{ item.mailFrom }}
+                    </td>
+                    <td>
+                      {{ item.mailTo}}
+                    </td>
+                     <td>
+                      {{ item.templateName}}
+                    </td>
+                    <td>
+                      {{ item.dateTime }}
+                    </td>
+                    <td >
+                      <div [ngSwitch]="item.status">
+                        <div class="badge text-bg-primary" *ngSwitchCase="'NEW'">{{ item.status }}</div>
+                        <div class="badge text-bg-success" *ngSwitchCase="'SUCCESS'">{{ item.status }}</div>
+                        <div class="badge text-bg-danger" *ngSwitchCase="'FAIL'">{{ item.status }}</div>
+                        <div *ngSwitchDefault>{{ item.status }}</div>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <div>
+                <pagination-controls
+                previousLabel="Prev"
+                nextLabel="Next"
+                (pageChange)="onTableDataChange($event)">
+                </pagination-controls>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-1">
+      </div>
+    </div>
+  </div>
+</div>

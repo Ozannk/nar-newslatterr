@@ -1,0 +1,96 @@
+<div class="arka">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="card mt-3">
+          <div class="card-header">
+            <h5>
+              <fa-icon [icon]="['fas', 'envelope']"></fa-icon>
+              Mail Şablonları
+            </h5>
+          </div>
+          <div class="card-body">
+            <div>
+              <table class="table table-bordered table-hover table-striped">
+                <thead style="text-align: center">
+                  <th>Şablon Adı</th>
+                  <th>Mail Konusu</th>
+                  <th>İşlemler</th>
+                </thead>
+                <tbody class="align-middle" style="text-align: center;">
+                  <tr *ngFor="let item of MailTemplate | paginate: {
+                    itemsPerPage: tableSize,
+                    currentPage: page,
+                    totalItems: count};  let i = index">
+                    <td>
+                      {{ item.name }}
+                    </td>
+                    <td>
+                      {{ item.title }}
+                    </td>
+                    <td>
+                      <button class="btn btn-outline-primary">
+                        <fa-icon [icon]="['fas', 'pen-to-square']" (click)="updateLoadMailTemplate(item)"></fa-icon>
+                      </button>
+                      <button class="btn btn-outline-danger" (click)="deleteMailTemplate(item.id)">
+                        <fa-icon [icon]="['fas', 'trash-can']"></fa-icon>
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <div class="pagination-controls">
+                <pagination-controls
+                previousLabel="Prev"
+                nextLabel="Next"
+                (pageChange)="onTableDataChange($event)"
+                >
+                </pagination-controls>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-8 ">
+        <div class="card mt-3 mb-3">
+          <div class="card-header">
+            <h5>
+              <fa-icon [icon]="['fas', 'envelope-open-text']"></fa-icon>
+              Şablon Oluşturucu
+            </h5>
+          </div>
+          <div class="card-body">
+            <div>
+              <div class="row mt-3">
+                <div class="col">
+                  <label for="formGroupExampleInput">Şablon Adı</label>
+                  <input type="text" [(ngModel)]="mailTemplateDetails.name" class="form-control"
+                    id="formGroupExampleInput" placeholder="Şablon ismini giriniz...">
+                </div>
+                <div class="col mb-5">
+                  <label for="formGroupExampleInput">Mail Konusu</label>
+                  <input type="text" [(ngModel)]="mailTemplateDetails.title" class="form-control"
+                    id="formGroupExampleInput2" placeholder="Konuyu giriniz...">
+                </div>
+              </div>
+              <editor [(ngModel)]="mailTemplateDetails.content"
+                [init]="{ plugins: 'lists link image table code help wordcount' }"></editor>
+              <div class="buton" style="text-align:center ;">
+                <button class="btn btn-outline-success mt-2" (click)="saveMailTemplate()">
+                  <h6>{{selectedId === 0 ? 'Kaydet' : 'Güncelle'}}
+                    <fa-icon [icon]="['fas', 'floppy-disk']"></fa-icon>
+                  </h6>
+                </button>
+                <button *ngIf="isClear()" class="btn btn-light mt-2" (click)="clearForm()">
+                  <h6>Formu Temizle
+                    <fa-icon [icon]="['fas', 'delete-left']"></fa-icon>
+                  </h6>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,10 @@
+@import "~@ng-select/ng-select/themes/material.theme.css";
+
+
+body {
+  background-color: #fcf8f5 !important;
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+

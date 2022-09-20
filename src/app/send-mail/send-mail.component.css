@@ -1,0 +1,29 @@
+.card-header {
+  background-color: #132339;
+  color: aliceblue;
+  text-align:center;
+
+}
+
+#container {
+  justify-content:center;
+  align-items:center;
+  position: fixed;
+}
+
+.my_margin {
+  margin-bottom: 15px;
+}
+
+.send-button{
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+#selectedEmail{
+  max-height: 110px;
+}
+
+.alert{
+  position:relative;
+}

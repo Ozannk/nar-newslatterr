@@ -1,0 +1,28 @@
+.card-header {
+  background-color: #1D573D;
+  color: aliceblue;
+}
+
+.btn.btn-outline-success {
+  margin-right: 3px;
+}
+
+
+.col-md-3 {
+  font-size: 12px;
+}
+
+
+.col-md-9 {
+  align-items: center;
+  font-size: 12px;
+}
+
+.pagination-controls{
+  text-align: center;
+}
+
+table {
+  table-layout: fixed;
+}
+

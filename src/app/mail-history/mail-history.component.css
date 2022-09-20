@@ -1,0 +1,16 @@
+.card-header {
+  background-color: #E63946;
+  color: aliceblue;
+}
+
+#container {
+  position: fixed;
+}
+
+.example-full-width{
+  display: block;
+}
+
+table {
+  table-layout: fixed;
+}

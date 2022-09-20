@@ -1,0 +1,11 @@
+.navbar.navbar-expand-lg {
+  background-color:  #0d1b2a;
+  color: white;
+}
+
+.nav-link.active {
+  color:white;
+  margin-left: 10px;
+}
+
+

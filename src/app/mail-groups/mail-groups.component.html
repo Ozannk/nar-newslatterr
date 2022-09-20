@@ -1,0 +1,148 @@
+<div class="arka">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-3">
+        <div class="card mt-3 mb-3">
+          <div class="card-header" style="font-size:12px;">
+            <h6> <fa-icon [icon]="['fas', 'rectangle-list']"></fa-icon> Mail Grubu Listesi</h6>
+          </div>
+          <div class="card-body">
+            <div>
+              <table class="table table-bordered table-hover table-striped">
+                <thead style="text-align: center">
+                  <th>İsim</th>
+                  <th>Tag</th>
+                  <th></th>
+                </thead>
+                <tbody class="align-middle" style="text-align: center;">
+                  <tr *ngFor="let item2 of MailGroup | paginate: {
+                    itemsPerPage: tableSize,
+                    currentPage: page,
+                    totalItems: count};  let i = index"  (click)="selectRow(item2)">
+                    <td>{{ item2.name }}</td>
+                    <td>
+                      {{ item2.tag }}
+                    </td>
+                    <td>
+                      <button class="btn btn-outline-danger btn-sm" (click)="deleteMailGroup(item2.id)">
+                        <fa-icon [icon]="['fas', 'xmark']"></fa-icon>
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <div class="pagination-controls">
+                <pagination-controls previousLabel="Prev" nextLabel="Next" (pageChange)="onTableDataChange($event)"></pagination-controls>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-9">
+        <div class="card mt-3 mb-3">
+          <div class="card-header">
+            <h5>
+              <fa-icon [icon]="['fas', 'user-group']"></fa-icon>Mail Grubu
+            </h5>
+          </div>
+          <div class="card-body">
+            <div>
+              <div class="row-dıs">
+                <div class="col mb-5">
+                  <div class="row">
+                    <div class="col-md-4 mt-2">
+                      <label for="formGroupExampleInput">Mail Grup İsmi</label>
+                      <input type="text" [(ngModel)]="MailGroupsDetails.name" class="form-control"
+                        id="formGroupExampleInput" placeholder="İsmi giriniz...">
+                    </div>
+                    <div class="col-md-4 mt-2">
+                      <label for="formGroupExampleInput">Mail Grup Tag</label>
+                      <input type="text" [(ngModel)]="MailGroupsDetails.tag" class="form-control"
+                        id="formGroupExampleInput" placeholder="İsmi giriniz...">
+                    </div>
+                  </div>
+                  <div class="card mt-3">
+                    <div class="card-header" style="background-color: #1D3F57;">
+                      <fa-icon [icon]="['fas', 'user-plus']"></fa-icon>
+                      Mail Ekle
+                      
+                    </div>
+                    <div class="card-body">
+                      <div class="row">
+                        <div class="col-md-4 mt-3">
+                          <label for="formGroupExampleInput">İsim</label>
+                          <input type="text" [(ngModel)]="MailDetail.name" class="form-control"
+                            id="formGroupExampleInput" placeholder="İsmi giriniz...">
+                        </div>
+                        <div class="col-md-4 mt-3">
+                          <label for="formGroupExampleInput">Edas</label>
+                          <input type="text" [(ngModel)]="MailDetail.edas" class="form-control"
+                            id="formGroupExampleInput2" placeholder="Tag'ı giriniz...">
+                        </div>
+                        <div class="col-md-4 mt-3">
+                          <label for="formGroupExampleInput">E-mail Adresi</label>
+                          <input type="email"  [(ngModel)]="MailDetail.mailAddress" [formControl]="email" class="form-control" id="email" required>
+                          <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert alert-danger">
+                            <div *ngIf="email.errors required">
+                              Email gereklidir.
+                            </div>
+                            <div *ngIf="email.errors email">
+                              Lütfen geçerli bir e posta adresi giriniz.
+                            </div>
+                          </div>
+                        </div>
+                        <div class="button" style=" text-align: center;">
+                          <button class="btn btn-outline-success btn-sm mt-2" [disabled]="email.invalid" (click)="addMail()">
+                            <fa-icon [icon]="['fas', 'plus']"></fa-icon>
+                            Ekle
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card mt-3">
+                    <div class="card-header" style="background-color: #1D3F57;">
+                      <fa-icon [icon]="['fas', 'rectangle-list']"></fa-icon>
+                      Mail Listesi
+                    </div>
+                    <div class="card-body">
+                      <div>
+                        <table class="table table-bordered table-hover table-striped">
+                          <thead style="text-align: center">
+                            <th>İsim</th>
+                            <th>Edas</th>
+                            <th>Mail Adresi</th>
+                            <th></th>
+                          </thead>
+                          <tbody class="align-middle" style="text-align: center;">
+                            <tr *ngFor="let item of MailList index as i">
+                              <ng-container>
+                                <td> {{item.name}} </td>
+                                <td> {{item.edas}} </td>
+                                <td> {{item.mailAddress}} </td>
+                                <th>
+                                  <button class="btn btn-outline-danger btn-sm" (click)="removeMail(i)">
+                                    <fa-icon [icon]="['fas', 'xmark']"></fa-icon>
+                                  </button>
+                                </th>
+                              </ng-container>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="button" style="display: block; text-align: center;">
+                <button class="btn btn-outline-success btn-sm" (click)="saveMailGroup()">
+                  <fa-icon [icon]="['fas', 'floppy-disk']"></fa-icon> Kaydet
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

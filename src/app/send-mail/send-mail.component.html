@@ -1,0 +1,88 @@
+<div class="arka">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-1">
+      </div>
+      <div class="col-md-10">
+        <div class="card mt-3 mb-3">
+          <div class="card-header">
+            <h5>
+              <fa-icon [icon]="['fas', 'envelope-circle-check']"></fa-icon>
+              Mail Gönder</h5>
+          </div>
+          <div class="card-body">
+            <div class="form">
+              <div class="row mt-1 mb-2">
+                  <div class="input-group mb-2">
+                    <span class="input-group-text" id="basic-addon1">Mail Template:</span>
+                    <label for="mailTemplates" class="form-label"></label>
+                    <ng-select
+                    id="mailTemplates"
+                    class="form-control"
+                    [items]="mailTemplates"
+                    bindLabel="name"
+                    appendTo="body"
+                    [multiple]="false"
+                    [(ngModel)]="selectedMailTemplate">
+                    </ng-select>
+                  </div>
+                  <div class="input-group mb-2">
+                    <span class="input-group-text" id="basic-addon2">To:</span>
+                    <label for="mailGroups" class="form-label"></label>
+                    <ng-select
+                    id="mailGroups"
+                    class="form-control"
+                    [items]="mailGroups"
+                    bindLabel="name"
+                    appendTo="body"
+                    [multiple]="true"
+                    [(ngModel)]="selectedMailGroups">
+                    </ng-select>
+                  </div>
+                  <br/>
+                  <form>
+                  <div id="selectedEmail" class="form-control form-control-sm mb-2" type="text" aria-label="readonly input example" readonly
+                    *ngIf="selectedMailGroups.length > 0">
+                    <strong>Selected Email: </strong>
+                    <ng-container
+                      *ngFor="let mailg of selectedMailGroups; index as i" >
+                      <span class="badge bg-success my_margin"> {{mailg.name}} </span>
+                      <span class="badge bg-primary my_margin">
+                          [
+                        <div *ngFor="let item of mailg.mailList; index as k" class="list-inline-item">
+                        (Edas: {{mailg.mailList[k].edas}}, {{mailg.mailList[k].mailAddress}}),
+                        </div>
+                        ]
+                      </span>
+                    </ng-container>
+                  </div>
+                  <div class="input-group mb-1">
+                    <span class="input-group-text" id="basic-addon3">Subject:</span>
+                    <input class="form-control"  [(ngModel)]="selectedMailTemplate.title" [ngModelOptions]="{standalone: true}"
+                    type="text" placeholder="Konuyu giriniz..." aria-label="default input example">
+                  </div>
+                </form>
+              </div>
+              <editor [(ngModel)]="selectedMailTemplate.content"
+              [init]="{ }" [disabled]="true"></editor>
+              <div class="send-button">
+                <ng-container >
+                  <button class="btn btn-outline-primary col-6 mx-auto mt-2"  [disabled]="(selectedMailGroups.length <= 0) || (selectedMailTemplate.id === undefined)" (click)="sendMail()">
+                    <fa-icon [icon]="['fas', 'paper-plane']"></fa-icon>
+                    Gönder
+                  </button>
+                </ng-container>
+                <div *ngIf="alert" class="alert alert-success alert-dismissible fade show mt-1" role="alert">
+                  <fa-icon [icon]="['fas', 'circle-check']"></fa-icon>
+                  <strong>Mail Gönderildi</strong>
+                  <button (click)="closeAlert()" type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-1"></div>
+    </div>
+  </div>
+</div>
